@@ -28,4 +28,8 @@ public class FGAService {
     public void convertListToSet(List<Student> group) {
         fgaAlgo.convertListToSet(group);
     }
+
+    public void clearStudent() {
+        fgaAlgo.clear();
+    }
 }

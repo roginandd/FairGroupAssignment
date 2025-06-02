@@ -29,6 +29,8 @@ public class FGAController {
     // For manual assigning
     @PostMapping("/assign/{groupCount}")
     public List<GroupResult> assignGroups(@RequestBody List<Student> students, @PathVariable int groupCount) {
+        fgaService.clearStudent();
+
         fgaService.convertListToSet(students);
 
         List<GroupResult> results = new ArrayList<>();

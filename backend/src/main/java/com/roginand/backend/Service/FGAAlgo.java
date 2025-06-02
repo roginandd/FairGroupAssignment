@@ -133,6 +133,10 @@ public class FGAAlgo {
         return (double) Math.round(sum / group.size() * 10) / 10;
     }
 
+    public void clear() {
+        studentWithGrade.clear();
+    }
+
 
     private boolean improveBySwapping(List<List<Student>> groups, int group1Index, int group2Index) {
         List<Student> group1 = groups.get(group1Index);
