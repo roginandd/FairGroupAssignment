@@ -71,25 +71,23 @@ public class FGAController {
     
     private ResponseEntity<?> getListResponseEntity(@PathVariable int group) {
         List<List<Student>> groups = fgaService.assignGroups(group);
-        GroupResult groupResult = null;
-        
+
         if (group <= 0 || group > groups.size()) {
-            throw new IllegalArgumentException("Group number must be between 1 and number of students");
+            throw new IllegalArgumentException("Group number must be between 1 and " + groups.size());
         }
-        
+
         List<GroupResult> results = new ArrayList<>();
 
         for (int i = 0; i < groups.size(); i++) {
             List<Student> studentList = groups.get(i);
             double avg = fgaService.calculateGroupAverage(studentList);
-            
-            groupResult = new GroupResult(i, avg, studentList);
-
+            GroupResult groupResult = new GroupResult(i + 1, avg, studentList); 
             results.add(groupResult);
         }
 
-        return ResponseEntity.ok(groups);
+        return ResponseEntity.ok(results);
     }
+
 
     private List<Student> parseCsvToStudents(String csvData) throws IOException {
         List<Student> students = new ArrayList<>();

@@ -219,7 +219,7 @@ function App() {
         <div className="w-full flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2 sm:py-3">
           <div className="flex items-center gap-2 sm:gap-3">
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-indigo-500 flex-shrink-0"
+              className="w-6 h-14 sm:w-6 sm:h-14 lg:w-7 lg:h-14 text-indigo-500 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -231,9 +231,12 @@ function App() {
                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1m13 0a3 3 0 00-3-3H7a3 3 0 00-3 3m13 0V7a4 4 0 00-4-4H7a4 4 0 00-4 4v13"
               />
             </svg>
-            <span className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-indigo-700">
-              Fair Group Assignment
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-indigo-700">
+                Fair Group Assignment
+              </span>
+              <span className="opacity-60 text-xs">by Roginand Villegas</span>
+            </div>
           </div>
         </div>
       </header>
