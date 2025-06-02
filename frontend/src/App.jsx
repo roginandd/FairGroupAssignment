@@ -180,11 +180,9 @@ function App() {
     }
   };
 
-  // Handle group count changes with validation
   const handleGroupCountChange = (e) => {
     const value = e.target.value;
 
-    // Allow empty string for user to clear field
     if (value === "") {
       setGroupCount("");
       return;
@@ -193,7 +191,7 @@ function App() {
     const count = Number(value);
     if (count >= 1) {
       setGroupCount(count);
-      setError(""); // Clear error if valid
+      setError(""); 
     }
   };
 
@@ -211,7 +209,6 @@ function App() {
 
   return (
     <div className="min-h-screen max-h-screen flex flex-col bg-gradient-to-br from-indigo-100 via-blue-50 to-white overflow-hidden">
-      {/* Header */}
       <header className="w-full bg-white/70 backdrop-blur border-b border-blue-100 shadow-sm flex-shrink-0">
         <div className="w-full flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2 sm:py-3">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -238,10 +235,8 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="flex-1 overflow-hidden">
         <div className="h-full grid grid-cols-1 xl:grid-cols-2 gap-0 xl:gap-4 p-0 xl:p-4">
-          {/* Input Panel */}
           <div className="bg-white/80 backdrop-blur-lg shadow-xl flex flex-col border-b xl:border-b-0 xl:border border-blue-100 xl:rounded-3xl overflow-hidden">
             <div className="p-3 sm:p-4 lg:p-6 xl:p-8 flex-1 overflow-y-auto">
               {/* CSV Upload Section */}
@@ -251,29 +246,28 @@ function App() {
                   onDragOver={handleDragOver}
                   className="w-full max-w-[1000px] h-[300px] mx-auto border-2 border-dashed border-indigo-500 rounded-xl flex items-center justify-center text-center p-6"
                 >
-                  <input
-                    type="file"
-                    accept=".csv"
-                    className="hidden"
-                    id="csv-upload"
-                    onChange={handleCsvChange}
-                  />
+                  <label
+                    htmlFor="csv-upload"
+                    className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      accept=".csv"
+                      className="hidden"
+                      id="csv-upload"
+                      onChange={handleCsvChange}
+                    />
 
-                  <div className="flex flex-col">
-                    <label
-                      htmlFor="csv-upload"
-                      className="cursor-pointer text-indigo-700 font-semibold text-lg"
-                    >
+                    <span className="text-indigo-700 font-semibold text-lg">
                       {csvFile
                         ? csvFile.name
                         : "Drop or click here to upload your CSV"}
-                    </label>
+                    </span>
+
                     {csvFile && (
-                      <label className="text-gray-500">
-                        Press to upload new
-                      </label>
+                      <span className="text-gray-500">Press to upload new</span>
                     )}
-                  </div>
+                  </label>
                 </div>
                 <button
                   className="mt-3 sm:mt-4 px-4 sm:px-5 py-2 bg-indigo-600 text-white rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold hover:bg-indigo-700 shadow disabled:opacity-50"
