@@ -1,17 +1,23 @@
 package com.roginand.backend.Controller;
 
-import com.roginand.backend.DTO.GroupResult;
-import com.roginand.backend.DTO.Student;
-import com.roginand.backend.Service.FGAService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.roginand.backend.DTO.GroupResult;
+import com.roginand.backend.DTO.Student;
+import com.roginand.backend.Service.FGAService;
 
 @RestController
 @RequestMapping("/api")
@@ -27,7 +33,7 @@ public class FGAController {
         return getListResponseEntity(group);
     }
 
-    @PostMapping(value = "/assign-csv/{group}", consumes = "text/plain")
+    @PostMapping(value = "/assign-csv/{group}", consumes = "text/csv")
     public ResponseEntity<List<GroupResult>> addStudentsFromCsv(@RequestBody String csvData, @PathVariable int group) throws IOException {
         List<Student> students = parseCsvToStudents(csvData);
 
@@ -37,6 +43,11 @@ public class FGAController {
         return getListResponseEntity(group);
     }
 
+    @GetMapping("/")
+    public String hello() {
+        return "This is the backend for FairGroupAssignment";
+    }
+    
     private ResponseEntity<List<GroupResult>> getListResponseEntity(@PathVariable int group) {
         List<List<Student>> groups = fgaService.assignGroups(group);
 
