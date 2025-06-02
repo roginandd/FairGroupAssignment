@@ -1,13 +1,17 @@
 package com.roginand.backend.Service;
 
-import com.roginand.backend.DTO.Student;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.roginand.backend.DTO.Student;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class FGAService {
-    private final FGAAlgo fgaAlgo = new FGAAlgo();
+    private final FGAAlgo fgaAlgo;
 
     public void addStudent(Student student) {
         fgaAlgo.add(student);

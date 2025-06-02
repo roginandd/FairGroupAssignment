@@ -4,6 +4,10 @@ import com.roginand.backend.DTO.Student;
 
 import java.util.*;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class FGAAlgo {
     TreeSet<Student> studentWithGrade = new TreeSet<>(new Comparator<Student>() {
         @Override
@@ -16,19 +20,8 @@ public class FGAAlgo {
         }
     });
 
-
-    public void add(Student student_param) {
-        if (student_param.getGrade() > 5.0 || student_param.getGrade() < 1.0) {
-            System.out.println("Skipping student " + student_param.getName() + " with invalid grade: " + student_param.getGrade());
-            return;
-        }
+    public void add (Student student_param) {
         studentWithGrade.add(student_param);
-    }
-
-    public void print() {
-        for (Student st : studentWithGrade) {
-            System.out.println(st.getName() + " | " + st.getGrade());
-        }
     }
 
     public TreeSet<Student> convertListToSet(List<Student> group) {
@@ -40,10 +33,11 @@ public class FGAAlgo {
     public List<List<Student>> assignGroup(int groupAmount) {
         int totalStudents = studentWithGrade.size();
 
-        if (totalStudents < groupAmount)    {
-            System.out.println("Not enough students to form " + groupAmount + " groups (minimum 1 student per group).");
-            return null;
+        if (totalStudents < groupAmount) {
+            throw new IllegalArgumentException("Not enough students to form " + groupAmount + " groups (min 1 student per group).");
+            
         }
+        
 
         // Initialize groups
         List<List<Student>> groups = new ArrayList<>();
@@ -69,6 +63,7 @@ public class FGAAlgo {
                 }
             }
         }
+
 
         // Swapping phase using divide-and-conquer
         balanceGroupsDivideConquer(groups, 0, groupAmount - 1);
@@ -96,7 +91,7 @@ public class FGAAlgo {
 
         if (left == right)
             return;
-
+        
         do {
             swapped = false;
             int maxIndex = -1, minIndex = -1;

@@ -1,23 +1,19 @@
 package com.roginand.backend.DTO;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Comparator;
 import java.util.Objects;
 
-@Getter @Setter
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public  class Student implements Comparable<Student>  {
     private String name;
     private double grade;
 
 
-    public Student(String name, double grade) {
-        this.name = name;
-        this.grade = Math.round(grade * 10.0) / 10.0;
-    }
 
     @Override
     public boolean equals(Object o) {
