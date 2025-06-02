@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://https://fair-group-assignment-r91ubkthj-roginandds-projects.vercel.app/")
+@CrossOrigin(origins = "https://fair-group-assignment-r91ubkthj-roginandds-projects.vercel.app")
 public class FGAController {
     private final FGAService fgaService;
     
