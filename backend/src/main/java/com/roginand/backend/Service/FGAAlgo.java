@@ -1,24 +1,23 @@
 package com.roginand.backend.Service;
 
-import com.roginand.backend.DTO.Student;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
+
+import com.roginand.backend.DTO.Student;
 
 
 @Service
 public class FGAAlgo {
-    TreeSet<Student> studentWithGrade = new TreeSet<>(new Comparator<Student>() {
-        @Override
-        public int compare(Student s1, Student s2) {
-            int gradeComparison = Double.compare(s1.getGrade(), s2.getGrade());
-            if (gradeComparison == 0) {
-                return s1.getName().compareTo(s2.getName());
-            }
-            return gradeComparison;
-        }
-    });
+    TreeSet<Student> studentWithGrade = new TreeSet<>(
+        Comparator.comparingDouble(Student::getGrade).reversed()
+                  .thenComparing(Student::getName)
+    );
+    
 
     public void add (Student student_param) {
         studentWithGrade.add(student_param);
@@ -88,15 +87,23 @@ public class FGAAlgo {
 
     private void mergeAndBalance(List<List<Student>> groups, int left, int right) {
         boolean swapped;
-
+        int maxIterations = 100; 
+        int iterations = 0;
+    
         if (left == right)
             return;
         
         do {
             swapped = false;
+            iterations++;
+            
+            if (iterations > maxIterations) {
+                break;
+            }
+            
             int maxIndex = -1, minIndex = -1;
             double maxAvg = Double.MIN_VALUE, minAvg = Double.MAX_VALUE;
-
+    
             for (int i = left; i <= right; i++) {
                 double avg = calculateGroupAverage(groups.get(i));
                 if (avg > maxAvg) {
@@ -108,7 +115,7 @@ public class FGAAlgo {
                     minIndex = i;
                 }
             }
-
+    
             if (maxIndex != -1 && minIndex != -1) {
                 if (improveBySwapping(groups, maxIndex, minIndex))
                     swapped = true;
