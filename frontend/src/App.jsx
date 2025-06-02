@@ -90,21 +90,6 @@ function App() {
             setError("No valid student data found in CSV");
             return;
           }
-
-          // Check for duplicate names
-          const names = processedData.map((s) => s.name.toLowerCase());
-          const duplicates = names.filter(
-            (name, index) => names.indexOf(name) !== index
-          );
-          if (duplicates.length > 0) {
-            setError(
-              `Duplicate student names found: ${[...new Set(duplicates)].join(
-                ", "
-              )}`
-            );
-            return;
-          }
-
           setStudentList(processedData);
           setError("");
         } catch (err) {
