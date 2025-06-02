@@ -197,6 +197,18 @@ function App() {
     }
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file && file.name.endsWith(".csv")) {
+      setCsvFile(file);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="min-h-screen max-h-screen flex flex-col bg-gradient-to-br from-indigo-100 via-blue-50 to-white overflow-hidden">
       {/* Header */}
@@ -234,19 +246,35 @@ function App() {
             <div className="p-3 sm:p-4 lg:p-6 xl:p-8 flex-1 overflow-y-auto">
               {/* CSV Upload Section */}
               <div className="border-2 border-dashed border-indigo-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 text-center mb-3 sm:mb-4 bg-indigo-50/50">
-                <input
-                  type="file"
-                  accept=".csv"
-                  className="hidden"
-                  id="csv-upload"
-                  onChange={handleCsvChange}
-                />
-                <label
-                  htmlFor="csv-upload"
-                  className="cursor-pointer text-indigo-700 font-semibold text-sm sm:text-base block"
+                <div
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  className="w-full max-w-[1000px] h-[300px] mx-auto border-2 border-dashed border-indigo-500 rounded-xl flex items-center justify-center text-center p-6"
                 >
-                  {csvFile ? csvFile.name : "Drop or click to upload CSV"}
-                </label>
+                  <input
+                    type="file"
+                    accept=".csv"
+                    className="hidden"
+                    id="csv-upload"
+                    onChange={handleCsvChange}
+                  />
+
+                  <div className="flex flex-col">
+                    <label
+                      htmlFor="csv-upload"
+                      className="cursor-pointer text-indigo-700 font-semibold text-lg"
+                    >
+                      {csvFile
+                        ? csvFile.name
+                        : "Drop or click here to upload your CSV"}
+                    </label>
+                    {csvFile && (
+                      <label className="text-gray-500">
+                        Press to upload new
+                      </label>
+                    )}
+                  </div>
+                </div>
                 <button
                   className="mt-3 sm:mt-4 px-4 sm:px-5 py-2 bg-indigo-600 text-white rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold hover:bg-indigo-700 shadow disabled:opacity-50"
                   onClick={handleParseCsv}
