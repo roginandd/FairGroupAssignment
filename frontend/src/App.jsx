@@ -206,11 +206,9 @@ function App() {
     }
 
     const count = Number(value);
-    if (count >= 2) {
+    if (count >= 1) {
       setGroupCount(count);
       setError(""); // Clear error if valid
-    } else {
-      setError("Number of groups must be at least 2.");
     }
   };
 
