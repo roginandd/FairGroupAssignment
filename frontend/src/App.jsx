@@ -235,9 +235,6 @@ function App() {
               Fair Group Assignment
             </span>
           </div>
-          <span className="hidden sm:block text-xs text-blue-400 font-medium">
-            Modern UI
-          </span>
         </div>
       </header>
 
