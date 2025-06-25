@@ -1,4 +1,3 @@
-Project Description
 This is a web application that automatically assigns users into groups based on their grades. It is a web-based implementation of a custom Hybrid Grouping Algorithm that combines the logic of:
 - Divide and Conquer
 - Round-Robin
