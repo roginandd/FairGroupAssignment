@@ -11,6 +11,8 @@ Features
 Tech Stack
 - Frontend: React, Tailwind
 - Backend: Spring Boot
+
+  
 Input
 - CSV file (with name, grade format)
 - Desired number of groups
